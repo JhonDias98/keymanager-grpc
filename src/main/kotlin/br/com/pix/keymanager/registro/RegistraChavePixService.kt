@@ -35,8 +35,6 @@ class RegistraChavePixService( @Inject val repository: ChavePixRepository,
         //Consulta no sistema do ERP do ITAU Client
         val itauClientResponse = itauClient.buscaContaPorTipo(novaChavePix.clienteId, novaChavePix.tipoDeConta.toString())
         check(itauClientResponse.status != HttpStatus.NOT_FOUND) { "Cliente não encontrado no Itaú" }
-        println("OOOOOOOOOOOOOOOOOIIIIIIIIIIIIIIIIII")
-        println(itauClientResponse.status)
         check(itauClientResponse.status == HttpStatus.OK) { "Erro ao buscar dados da conta no Itaú" }
 
         val conta = itauClientResponse.body()!!.toModel()
